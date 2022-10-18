@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+
+<link rel="stylesheet" href="/blog/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"lincmin.github.io","root":"/blog/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="概念简介ES6 是什么ES6 全称为 ECMAScript 6.0，是 JavaScript 语言的下一代标准，已经在 2015 年 6 月正式发布。它的目标是使得 JavaScript 语言可以用来编写复杂的大型应用程序，成为企业级开发语言。ECMAScript 和 JavaScript 的关系是，前者是后者的规格，后者是前者的一种实现。ES6 既是一个历史名词，也是一个泛指，含义是 5.1 版">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript 语言的下一代标准 ES6">
+<meta property="og:url" content="https://lincmin.github.io/2016/12/18/JavaScript%E8%AF%AD%E8%A8%80%E7%9A%84%E4%B8%8B%E4%B8%80%E4%BB%A3%E6%A0%87%E5%87%86ES6/index.html">
+<meta property="og:site_name" content="lincm&#39;s blog">
+<meta property="og:description" content="概念简介ES6 是什么ES6 全称为 ECMAScript 6.0，是 JavaScript 语言的下一代标准，已经在 2015 年 6 月正式发布。它的目标是使得 JavaScript 语言可以用来编写复杂的大型应用程序，成为企业级开发语言。ECMAScript 和 JavaScript 的关系是，前者是后者的规格，后者是前者的一种实现。ES6 既是一个历史名词，也是一个泛指，含义是 5.1 版">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-12-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-06-02T07:43:07.171Z">
+<meta property="article:author" content="lincm">
+<meta property="article:tag" content="ES6">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://lincmin.github.io/2016/12/18/JavaScript%E8%AF%AD%E8%A8%80%E7%9A%84%E4%B8%8B%E4%B8%80%E4%BB%A3%E6%A0%87%E5%87%86ES6/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>JavaScript 语言的下一代标准 ES6 | lincm's blog</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">lincm's blog</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-tools">
+
+    <a href="/blog/tools/" rel="section"><i class="fa fa-heartbeat fa-fw"></i>tools</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://lincmin.github.io/2016/12/18/JavaScript%E8%AF%AD%E8%A8%80%E7%9A%84%E4%B8%8B%E4%B8%80%E4%BB%A3%E6%A0%87%E5%87%86ES6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/avatar.gif">
+      <meta itemprop="name" content="lincm">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="lincm's blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          JavaScript 语言的下一代标准 ES6
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-12-18 00:00:00" itemprop="dateCreated datePublished" datetime="2016-12-18T00:00:00+08:00">2016-12-18</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/blog/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="概念简介"><a href="#概念简介" class="headerlink" title="概念简介"></a>概念简介</h1><h2 id="ES6-是什么"><a href="#ES6-是什么" class="headerlink" title="ES6 是什么"></a>ES6 是什么</h2><p>ES6 全称为 ECMAScript 6.0，是 JavaScript 语言的下一代标准，已经在 2015 年 6 月正式发布。它的目标是使得 JavaScript 语言可以用来编写复杂的大型应用程序，成为企业级开发语言。ECMAScript 和 JavaScript 的关系是，前者是后者的规格，后者是前者的一种实现。<br>ES6 既是一个历史名词，也是一个泛指，含义是 5.1 版以后的 JavaScript 的下一代标准，涵盖了 ES2015、ES2016、ES2017 等等。</p>
+<h2 id="Babel-是什么"><a href="#Babel-是什么" class="headerlink" title="Babel 是什么"></a>Babel 是什么</h2><p>Babel 是一个广泛使用的 ES6 转码器，可以将 ES6 代码转为 ES5 代码，从而在现有环境执行。这意味着，你可以用 ES6 的方式编写程序，又不用担心现有环境是否支持。</p>
+<h1 id="ES6-常用特性"><a href="#ES6-常用特性" class="headerlink" title="ES6 常用特性"></a>ES6 常用特性</h1><h2 id="const-和-let"><a href="#const-和-let" class="headerlink" title="const 和 let"></a>const 和 let</h2><p>const 声明一个只读的常量。一旦声明，常量的值就不能改变。所以声明后必须立即初始化。let 声明的是变量</p>
+<ul>
+<li>块级作用域，区块之间的代码互不影响</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function f1() &#123;</span><br><span class="line">  let n = 5;</span><br><span class="line">  if (true) &#123;</span><br><span class="line">    let n = 10;</span><br><span class="line">  &#125;</span><br><span class="line">  console.log(n); // 5</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>不存在变量提升，遵循先声明后使用的原则</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// var 的情况</span><br><span class="line">console.log(foo); // 输出undefined</span><br><span class="line">var foo = 2;</span><br><span class="line"></span><br><span class="line">// let 的情况</span><br><span class="line">console.log(bar); // 报错ReferenceError</span><br><span class="line">let bar = 2;</span><br></pre></td></tr></table></figure>
+
+<h2 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h2><p>模板字符串（template string）是增强版的字符串，用反引号（`）标识。它可以当作普通字符串使用，也可以用来定义多行字符串，或者在字符串中嵌入变量。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// 普通字符串</span><br><span class="line">`In JavaScript &#x27;\n&#x27; is a line-feed.`</span><br><span class="line"></span><br><span class="line">// 多行字符串</span><br><span class="line">`In JavaScript this is</span><br><span class="line"> not legal.`</span><br><span class="line"></span><br><span class="line">// 字符串中嵌入变量</span><br><span class="line">let name = &quot;Bob&quot;, time = &quot;today&quot;;</span><br><span class="line">`Hello $&#123;name&#125;, how are you $&#123;time&#125;?`</span><br></pre></td></tr></table></figure>
+
+<h2 id="默认参数"><a href="#默认参数" class="headerlink" title="默认参数"></a>默认参数</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function logActivity(activity = &#x27;skiing&#x27;) &#123;</span><br><span class="line">  console.log(activity);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">logActivity();  // skiing</span><br></pre></td></tr></table></figure>
+
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><p>函数的快捷写法，不需要通过 function 关键字创建函数，并且还可以省略 return 关键字。同时，箭头函数还会继承当前上下文的 this 关键字。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[1, 2, 3].map(x =&gt; x + 1);  // [2, 3, 4]</span><br></pre></td></tr></table></figure>
+
+<h2 id="模块的-Import-和-Export"><a href="#模块的-Import-和-Export" class="headerlink" title="模块的 Import 和 Export"></a>模块的 Import 和 Export</h2><p>import 用于引入模块，export 用于导出模块。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 引入全部</span><br><span class="line">import ReactDOM from &#x27;react-dom&#x27;;</span><br><span class="line"></span><br><span class="line">// 引入全部并作为 Form 对象</span><br><span class="line">import * as Form from &#x27;./lib/Form&#x27;;</span><br><span class="line"></span><br><span class="line">// 引入部分</span><br><span class="line">const &#123; Header, Footer &#125; = Layout;</span><br><span class="line"></span><br><span class="line">// 导出默认</span><br><span class="line">export default App;</span><br><span class="line"></span><br><span class="line">// 部分导出，需 import &#123; App &#125; from &#x27;./file&#x27;; 引入</span><br><span class="line">export class App extend Component &#123;&#125;;</span><br></pre></td></tr></table></figure>
+
+<h2 id="析构赋值"><a href="#析构赋值" class="headerlink" title="析构赋值"></a>析构赋值</h2><p>析构赋值就是从 Object 或 Array 里取部分数据存为变量。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 对象</span><br><span class="line">const student = &#123; name: &#x27;lily&#x27;, age: 18 &#125;;</span><br><span class="line">const &#123; name, age &#125; = student;</span><br><span class="line">console.log(`$&#123;name&#125; : $&#123;age&#125;`);  // lily : 18</span><br><span class="line"></span><br><span class="line">// 数组</span><br><span class="line">const arr = [1, 2];</span><br><span class="line">const [foo, bar] = arr;</span><br><span class="line">console.log(foo);  // 1</span><br></pre></td></tr></table></figure>
+
+<h2 id="对象字面量改进"><a href="#对象字面量改进" class="headerlink" title="对象字面量改进"></a>对象字面量改进</h2><p>便于重新组织一个 Object</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const name = &#x27;John&#x27;;</span><br><span class="line">const age = 18;</span><br><span class="line"></span><br><span class="line">const student = &#123; name, age &#125;;  // &#123; name: &#x27;John&#x27;, age: 18 &#125;</span><br></pre></td></tr></table></figure>
+
+<p>定义对象方法时，可以省去 function 关键字</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">class APP extends Component &#123;</span><br><span class="line">  componentDidMount() &#123;&#125;// 等同于 componentDidMount: function() &#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Spread-运算符"><a href="#Spread-运算符" class="headerlink" title="Spread 运算符"></a>Spread 运算符</h2><p>展开运算符即 3 个点 <code>...</code> ， 可用于组装数组</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const todos = [&#x27;1&#x27;];</span><br><span class="line">[...todos, &#x27;2&#x27;];  // [&#x27;1&#x27;, &#x27;2&#x27;]</span><br></pre></td></tr></table></figure>
+
+<p>组合成新的 Object</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">const A = &#123;</span><br><span class="line">  a: 1,</span><br><span class="line">  b: 2,</span><br><span class="line">&#125;;</span><br><span class="line">const B = &#123;</span><br><span class="line">  b: 3,</span><br><span class="line">  c: 2,</span><br><span class="line">&#125;;</span><br><span class="line">const d = 4;</span><br><span class="line"></span><br><span class="line">const ret = &#123; ...A, ...B, d &#125;;  // &#123; a:1, b:3, c:2, d:4 &#125;</span><br></pre></td></tr></table></figure>
+
+<p>用于获取数组的部分项</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">const arr = [&#x27;1&#x27;, &#x27;2&#x27;, &#x27;3&#x27;];</span><br><span class="line">const [first, ...rest] = arr;</span><br><span class="line">rest;  // [&#x27;2&#x27;, &#x27;3&#x27;]</span><br><span class="line"></span><br><span class="line">// 忽略中间项</span><br><span class="line">const [first, , ...rest] = arr;</span><br><span class="line">rest;  // [&#x27;3&#x27;]</span><br></pre></td></tr></table></figure>
+
+<p>收集函数参数为数组</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">function foo(first, ...rest) &#123;</span><br><span class="line">  console.log(rest);</span><br><span class="line">&#125;</span><br><span class="line">foo(&#x27;a&#x27;, &#x27;b&#x27;, &#x27;c&#x27;);  // [&#x27;b&#x27;, &#x27;c&#x27;];</span><br></pre></td></tr></table></figure>
+
+<p>代替 apply</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">function foo(x, y, z) &#123;&#125;</span><br><span class="line">const args = [1,2,3];</span><br><span class="line"></span><br><span class="line">// 下面两句效果相同</span><br><span class="line">foo.apply(null, args);</span><br><span class="line">foo(...args);</span><br></pre></td></tr></table></figure>
+
+<h2 id="Promises-对象"><a href="#Promises-对象" class="headerlink" title="Promises 对象"></a>Promises 对象</h2><p>Promise 对象代表一个异步操作，可以解决回调函数嵌套的问题。有三种状态：pending（进行中）、fulfilled（已成功）和 rejected（已失败）。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">const delay = (time) =&gt; &#123;</span><br><span class="line">  return new Promise(resolve =&gt; &#123;</span><br><span class="line">    console.log(1)</span><br><span class="line">    setTimeout(resolve,time)</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">delay(2000).then( () =&gt;&#123;</span><br><span class="line">    console.log(2)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">console.log(3)</span><br><span class="line">// 输出顺序为1，3，2</span><br></pre></td></tr></table></figure>
+
+<h2 id="Generators"><a href="#Generators" class="headerlink" title="Generators"></a>Generators</h2><p>Generator 最大特点就是可以交出函数的执行权，通过 yield 关键字实现暂停功能。可以使异步逻辑通过同步的方式组织起来。一个简单的 Generator 函数示例.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">function* example() &#123;</span><br><span class="line">  yield 1;</span><br><span class="line">  yield 2;</span><br><span class="line">  yield 3;</span><br><span class="line">&#125;</span><br><span class="line">var ex=example();</span><br><span class="line">ex.next();//&#123;value:1，done:false&#125;</span><br><span class="line">ex.next();//&#123;value:2，done:false&#125;</span><br><span class="line">ex.next();//&#123;value:3，done:false&#125;</span><br><span class="line">ex.next();//&#123;value:undefined，done:true&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a target="_blank" rel="noopener" href="http://es6.ruanyifeng.com/">ECMAScript 6 入门</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/ES6/" rel="tag"># ES6</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/blog/2016/11/05/%E4%BD%BF%E7%94%A8webpack%E6%9E%84%E5%BB%BA%E5%89%8D%E7%AB%AF%E5%B7%A5%E7%A8%8B/" rel="prev" title="使用webpack构建前端工程">
+      <i class="fa fa-chevron-left"></i> 使用webpack构建前端工程
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/blog/2017/01/08/React%E5%AD%A6%E4%B9%A0%E6%91%98%E8%A6%81/" rel="next" title="React学习摘要">
+      React学习摘要 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E5%BF%B5%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">概念简介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ES6-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.1.</span> <span class="nav-text">ES6 是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Babel-%E6%98%AF%E4%BB%80%E4%B9%88"><span class="nav-number">1.2.</span> <span class="nav-text">Babel 是什么</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ES6-%E5%B8%B8%E7%94%A8%E7%89%B9%E6%80%A7"><span class="nav-number">2.</span> <span class="nav-text">ES6 常用特性</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#const-%E5%92%8C-let"><span class="nav-number">2.1.</span> <span class="nav-text">const 和 let</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">2.2.</span> <span class="nav-text">模板字符串</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4%E5%8F%82%E6%95%B0"><span class="nav-number">2.3.</span> <span class="nav-text">默认参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0"><span class="nav-number">2.4.</span> <span class="nav-text">箭头函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A8%A1%E5%9D%97%E7%9A%84-Import-%E5%92%8C-Export"><span class="nav-number">2.5.</span> <span class="nav-text">模块的 Import 和 Export</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9E%90%E6%9E%84%E8%B5%8B%E5%80%BC"><span class="nav-number">2.6.</span> <span class="nav-text">析构赋值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E5%AD%97%E9%9D%A2%E9%87%8F%E6%94%B9%E8%BF%9B"><span class="nav-number">2.7.</span> <span class="nav-text">对象字面量改进</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spread-%E8%BF%90%E7%AE%97%E7%AC%A6"><span class="nav-number">2.8.</span> <span class="nav-text">Spread 运算符</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Promises-%E5%AF%B9%E8%B1%A1"><span class="nav-number">2.9.</span> <span class="nav-text">Promises 对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Generators"><span class="nav-number">2.10.</span> <span class="nav-text">Generators</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">lincm</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/blog/archives/">
+        
+          <span class="site-state-item-count">36</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/blog/categories/">
+          
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/blog/tags/">
+          
+        <span class="site-state-item-count">39</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lincm</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/blog/lib/anime.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.min.js"></script>
+  <script src="/blog/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/blog/js/utils.js"></script>
+
+<script src="/blog/js/motion.js"></script>
+
+
+<script src="/blog/js/schemes/pisces.js"></script>
+
+
+<script src="/blog/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
